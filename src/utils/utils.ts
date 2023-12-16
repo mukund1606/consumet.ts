@@ -1,8 +1,8 @@
 // import sharp from 'sharp';
 import { load } from 'cheerio';
 // import * as blurhash from 'blurhash';
-import { ProxyConfig } from '../models';
 import axios, { AxiosRequestConfig } from 'axios';
+import { ProxyConfig } from '../models';
 
 export const USER_AGENT =
   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36';
@@ -169,7 +169,7 @@ export const substringBeforeLast = (str: string, toFind: string) => {
 // };
 
 export const getHashFromImage = (url: string) => {
-  if (url.length === 0 || url === null) {
+  if (url === null || url?.length === 0) {
     return '';
   } else {
     let hash!: string;

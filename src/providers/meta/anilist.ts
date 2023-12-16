@@ -2,49 +2,49 @@ import axios, { AxiosAdapter } from 'axios';
 
 import {
   AnimeParser,
-  ISearch,
-  IAnimeInfo,
-  MediaStatus,
-  IAnimeResult,
-  ISource,
-  IAnimeEpisode,
-  SubOrSub,
-  IEpisodeServer,
   Genres,
-  MangaParser,
+  IAnimeEpisode,
+  IAnimeInfo,
+  IAnimeResult,
+  IEpisodeServer,
+  IMangaChapter,
   IMangaChapterPage,
   IMangaInfo,
   IMangaResult,
-  IMangaChapter,
-  ProxyConfig,
-  MediaFormat,
+  ISearch,
+  ISource,
   ITitle,
+  MangaParser,
+  MediaFormat,
+  MediaStatus,
+  ProxyConfig,
+  SubOrSub,
 } from '../../models';
-import {
-  anilistSearchQuery,
-  anilistMediaDetailQuery,
-  kitsuSearchQuery,
-  anilistTrendingQuery,
-  anilistPopularQuery,
-  anilistAiringScheduleQuery,
-  anilistGenresQuery,
-  anilistAdvancedQuery,
-  anilistSiteStatisticsQuery,
-  anilistCharacterQuery,
-  range,
-  getDays,
-  days,
-  capitalizeFirstLetter,
-  isJson,
-} from '../../utils';
 import Gogoanime from '../../providers/anime/gogoanime';
+import {
+  anilistAdvancedQuery,
+  anilistAiringScheduleQuery,
+  anilistCharacterQuery,
+  anilistGenresQuery,
+  anilistMediaDetailQuery,
+  anilistPopularQuery,
+  anilistSearchQuery,
+  anilistSiteStatisticsQuery,
+  anilistTrendingQuery,
+  capitalizeFirstLetter,
+  days,
+  getDays,
+  isJson,
+  kitsuSearchQuery,
+  range,
+} from '../../utils';
+import { compareTwoStrings, getHashFromImage } from '../../utils/utils';
+import NineAnime from '../anime/9anime';
 import Anify from '../anime/anify';
+import Bilibili from '../anime/bilibili';
+import Crunchyroll from '../anime/crunchyroll';
 import Zoro from '../anime/zoro';
 import Mangasee123 from '../manga/mangasee123';
-import Crunchyroll from '../anime/crunchyroll';
-import Bilibili from '../anime/bilibili';
-import NineAnime from '../anime/9anime';
-import { compareTwoStrings, getHashFromImage } from '../../utils/utils';
 
 class Anilist extends AnimeParser {
   override readonly name = 'Anilist';

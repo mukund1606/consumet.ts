@@ -1,5 +1,5 @@
 import { AxiosAdapter } from 'axios';
-import { AnimeParser, ISearch, IAnimeInfo, IAnimeResult, ISource, IAnimeEpisode, IEpisodeServer, Genres, MangaParser, IMangaChapterPage, IMangaInfo, IMangaResult, ProxyConfig } from '../../models';
+import { AnimeParser, Genres, IAnimeEpisode, IAnimeInfo, IAnimeResult, IEpisodeServer, IMangaChapterPage, IMangaInfo, IMangaResult, ISearch, ISource, MangaParser, ProxyConfig } from '../../models';
 declare class Anilist extends AnimeParser {
     proxyConfig?: ProxyConfig | undefined;
     readonly name = "Anilist";

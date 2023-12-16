@@ -1,13 +1,13 @@
 import { load } from 'cheerio';
 
 import {
-  MangaParser,
-  ISearch,
+  IMangaChapter,
+  IMangaChapterPage,
   IMangaInfo,
   IMangaResult,
+  ISearch,
+  MangaParser,
   MediaStatus,
-  IMangaChapterPage,
-  IMangaChapter,
 } from '../../models';
 
 class BRMangas extends MangaParser {
@@ -118,6 +118,7 @@ class BRMangas extends MangaParser {
    */
   override search = async (query: string): Promise<ISearch<IMangaResult>> => {
     try {
+      console.log(`${this.baseUrl}/?s=${query.replace(/ /g, '+')}`)
       const { data } = await this.client.get(`${this.baseUrl}/?s=${query.replace(/ /g, '+')}`);
       const $ = load(data);
 

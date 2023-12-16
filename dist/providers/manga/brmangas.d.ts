@@ -1,4 +1,4 @@
-import { MangaParser, ISearch, IMangaInfo, IMangaResult, IMangaChapterPage } from '../../models';
+import { IMangaChapterPage, IMangaInfo, IMangaResult, ISearch, MangaParser } from '../../models';
 declare class BRMangas extends MangaParser {
     readonly name = "BRMangas";
     protected baseUrl: string;

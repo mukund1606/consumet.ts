@@ -6,15 +6,15 @@ var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = __importDefault(require("axios"));
 const models_1 = require("../../models");
-const utils_1 = require("../../utils");
 const gogoanime_1 = __importDefault(require("../../providers/anime/gogoanime"));
+const utils_1 = require("../../utils");
+const utils_2 = require("../../utils/utils");
+const _9anime_1 = __importDefault(require("../anime/9anime"));
 const anify_1 = __importDefault(require("../anime/anify"));
+const bilibili_1 = __importDefault(require("../anime/bilibili"));
+const crunchyroll_1 = __importDefault(require("../anime/crunchyroll"));
 const zoro_1 = __importDefault(require("../anime/zoro"));
 const mangasee123_1 = __importDefault(require("../manga/mangasee123"));
-const crunchyroll_1 = __importDefault(require("../anime/crunchyroll"));
-const bilibili_1 = __importDefault(require("../anime/bilibili"));
-const _9anime_1 = __importDefault(require("../anime/9anime"));
-const utils_2 = require("../../utils/utils");
 class Anilist extends models_1.AnimeParser {
     /**
      * This class maps anilist to kitsu with any other anime provider.
@@ -1684,7 +1684,7 @@ Anilist.Manga = class Manga {
                 query: (0, utils_1.anilistSearchQuery)(query, page, perPage, 'MANGA'),
             };
             try {
-                const { data } = await axios_1.default.post(new Anilist().anilistGraphqlUrl, options);
+                const { data } = await axios_1.default.post(new _a().anilistGraphqlUrl, options);
                 const res = {
                     currentPage: data.data.Page.pageInfo.currentPage,
                     hasNextPage: data.data.Page.pageInfo.hasNextPage,
@@ -1755,7 +1755,7 @@ Anilist.Manga = class Manga {
                 query: (0, utils_1.anilistMediaDetailQuery)(id),
             };
             try {
-                const { data } = await axios_1.default.post(new Anilist().anilistGraphqlUrl, options).catch(err => {
+                const { data } = await axios_1.default.post(new _a().anilistGraphqlUrl, options).catch(err => {
                     throw new Error('Media not found');
                 });
                 mangaInfo.malId = data.data.Media.idMal;
@@ -1895,7 +1895,7 @@ Anilist.Manga = class Manga {
                         rating: item.node.meanScore,
                     });
                 });
-                mangaInfo.chapters = await new Anilist().findManga(this.provider, {
+                mangaInfo.chapters = await new _a().findManga(this.provider, {
                     english: mangaInfo.title.english,
                     romaji: mangaInfo.title.romaji,
                 }, mangaInfo.malId);

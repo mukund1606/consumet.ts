@@ -9,10 +9,10 @@ class ComicK extends models_1.MangaParser {
     constructor() {
         super(...arguments);
         this.name = 'ComicK';
-        this.baseUrl = 'https://comick.app';
+        this.baseUrl = 'https://comick.cc';
         this.logo = 'https://th.bing.com/th/id/OIP.fw4WrmAoA2PmKitiyMzUIgAAAA?pid=ImgDet&rs=1';
         this.classPath = 'MANGA.ComicK';
-        this.apiUrl = 'https://api.comick.app';
+        this.apiUrl = 'https://api.comick.cc';
         /**
          * @description Fetches info about the manga
          * @param mangaId Comic slug
@@ -21,7 +21,7 @@ class ComicK extends models_1.MangaParser {
         this.fetchMangaInfo = async (mangaId) => {
             var _a, _b, _c, _d, _e, _f;
             try {
-                const req = await this._axios().get(`/comic/${mangaId}`);
+                const req = await this._axios().get(`${this.apiUrl}/comic/${mangaId}`);
                 const data = req.data.comic;
                 const links = Object.values((_a = data.links) !== null && _a !== void 0 ? _a : []).filter(link => link !== null);
                 const mangaInfo = {
@@ -61,7 +61,7 @@ class ComicK extends models_1.MangaParser {
          */
         this.fetchChapterPages = async (chapterId) => {
             try {
-                const { data } = await this._axios().get(`/chapter/${chapterId}`);
+                const { data } = await this._axios().get(`${this.apiUrl}/chapter/${chapterId}`);
                 const pages = [];
                 data.chapter.md_images.map((image, index) => {
                     pages.push({
@@ -89,7 +89,7 @@ class ComicK extends models_1.MangaParser {
             if (limit * (page - 1) >= 10000)
                 throw new Error('not enough results');
             try {
-                const req = await this._axios().get(`/v1.0/search?q=${encodeURIComponent(query)}&limit=${limit}&page=${page}`);
+                const req = await this._axios().get(`${this.apiUrl}/v1.0/search?q=${encodeURIComponent(query)}&limit=${limit}&page=${page}`);
                 const results = {
                     currentPage: page,
                     results: [],
@@ -98,7 +98,7 @@ class ComicK extends models_1.MangaParser {
                 for (const manga of data) {
                     let cover = manga.md_covers ? manga.md_covers[0] : null;
                     if (cover && cover.b2key != undefined) {
-                        cover = `https://meo.comick.pictures${cover.b2key}`;
+                        cover = `https://meo.comick.pictures/${cover.b2key}`;
                     }
                     results.results.push({
                         id: manga.slug,
@@ -118,7 +118,7 @@ class ComicK extends models_1.MangaParser {
                 page = 1;
             }
             const comicId = await this.getComicId(mangaId);
-            const req = await this._axios().get(`/comic/${comicId}/chapters?page=${page}`);
+            const req = await this._axios().get(`${this.apiUrl}/comic/${comicId}/chapters?page=${page}`);
             return req.data.chapters;
         };
     }
@@ -136,7 +136,7 @@ class ComicK extends models_1.MangaParser {
      * @returns Promise<string> empty if not found
      */
     async getComicId(id) {
-        const req = await this._axios().get(`/comic/${id}`);
+        const req = await this._axios().get(`${this.apiUrl}/comic/${id}`);
         const data = req.data['comic'];
         return data ? data.hid : '';
     }

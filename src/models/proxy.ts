@@ -33,18 +33,12 @@ export class Proxy {
 
     this.client.interceptors.request.use(config => {
       if (proxyConfig?.url) {
-        config.headers = {
-          ...config.headers,
-          'x-api-key': proxyConfig?.key ?? '',
-        };
+        config.headers.set('x-api-key', proxyConfig?.key ?? '')
         config.url = `${proxyConfig.url}${config?.url ? config?.url : ''}`;
       }
 
       if (config?.url?.includes('anify'))
-        config.headers = {
-          ...config.headers,
-          'User-Agent': 'consumet',
-        };
+      config.headers.set('User-Agent', 'consumet');
 
       return config;
     });

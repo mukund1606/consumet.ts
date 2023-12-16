@@ -87,6 +87,7 @@ class BRMangas extends models_1.MangaParser {
          */
         this.search = async (query) => {
             try {
+                console.log(`${this.baseUrl}/?s=${query.replace(/ /g, '+')}`);
                 const { data } = await this.client.get(`${this.baseUrl}/?s=${query.replace(/ /g, '+')}`);
                 const $ = (0, cheerio_1.load)(data);
                 const results = $('body > div.scroller-inner > div.wrapper > main > div.container > div.listagem > div.col')
